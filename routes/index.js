@@ -52,7 +52,7 @@ var db = req.db;
 	      							that will allow them to find, schedule, 
 	      							and pay for cleaning services. 
 	      							We are looking forward to providing 
-	      							clients and professionals these quality services in early 2018.
+	      							clients and professionals these quality services in 2018.
       							</p>
       							<br>
       							<p>Cheers,</p>

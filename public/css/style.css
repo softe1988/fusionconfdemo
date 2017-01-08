@@ -33,7 +33,7 @@ body {
     line-height: 24px;
     margin: 0 auto;
     position: relative;
-    background-color: #6bc43c;
+    background-color: #8BC34A;
 }
 h1 {
     font-size: 93px;
@@ -266,20 +266,21 @@ p{
 
 #watch .dash:first-child{
     border-radius: 8px 0px 0px 8px;
-    background-color: #0d1e81;
+    background-color: #D32F2F;
 }
 #watch .dash:last-child{
     border-radius: 0px 8px 8px 0px;
-    background-color: #3350b9;
+    background-color: #FF526D;
     padding-left: 28px;
     padding-right: 28px;
 }
 
 #watch .dash:nth-child(2){
-    background-color: #1b3297;
+    background-color: #F44336;
 }
+
 #watch .dash:nth-child(3){
-    background-color: #2d47af;
+    background-color: #FF5252;
 }
 
 #watch .dash .digit {
