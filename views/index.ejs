@@ -91,26 +91,26 @@
             </div>
             <div class= "col-xs-4 col-sm-4 col-md-4 col-lg-4">    
                 <p>Stay up to date on our progress by joining our mailing list </p>
-                <form>
+                <form name="adduser", method="post", action="/adduser">
                     <div class="form-group">
                         <label for="First Name">First Name</label>
-                        <input type="name" class="form-control" id="firstName" aria-describedby="First Name Help" placeholder="First Name">
+                        <input type="name" class="form-control" name="fname" aria-describedby="First Name Help" placeholder="First Name">
                        
                   </div>
                    <div class="form-group">
                         <label for="Last Name">Last Name</label>
-                        <input type="name" class="form-control" id="lastName" aria-describedby="Last Name Help" placeholder="Last Name">
+                        <input type="name" class="form-control" name="lname" aria-describedby="Last Name Help" placeholder="Last Name">
                        
                   </div>
                     <div class="form-group">
                         <label for="Email">Email Address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                        <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Email">
                         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.
                         </small>
                   </div>
                   <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                   </div>
-                  <button type="submit" onClick="createUser();" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                
             </div>

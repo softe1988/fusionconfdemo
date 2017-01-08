@@ -102,3 +102,8 @@ mongoose.connect(url)
   .catch(function(err){
     console.log('Unable to connect to the mongoDB server. Error:', err);
   });
+
+app.use(function(req, res, next){
+  req.db = db;
+  next();
+})  
