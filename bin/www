@@ -7,6 +7,12 @@
 var app = require('../app');
 var debug = require('debug')('procleanservlanding:server');
 var http = require('http');
+require('dotenv').config();
+
+var mongoose        = require('mongoose');
+mongoose.Promise    = global.Promise;
+var db              = mongoose.connection;
+var url             = process.env.DB_URL;
 
 /**
  * Get port from environment and store in Express.
@@ -88,3 +94,11 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+mongoose.connect(url)
+  .then(function(){
+    console.log('Connection established to', url);
+  })
+  .catch(function(err){
+    console.log('Unable to connect to the mongoDB server. Error:', err);
+  });
