@@ -45,8 +45,8 @@ router.route('/adduser')
 	  			console.log(`creating new user ${JSON.stringify(user, null, 2)}`)
 	  			res.format({
 	  				html: function(){
-	  					res.location("user");
-	  					res.redirect("/user")
+	  					res.location("/adduser");
+	  					res.redirect("/adduser")
 	  				},
 	  				json: function(){
 	  					res.json(user);
