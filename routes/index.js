@@ -42,7 +42,7 @@ router.route('/adduser').post(function(req, res){
 
       var email = {
           to: recipient,
-          from: 'softe1988@gmail.com',
+          from: 'procleanservcommunity@gmail.com',
           subject: "Welcome To ProCleanServ",
           text: "Hello!\n\n Welcome to ProCleanServ. Stay tuned for updates on our launch date and service offerings on our platform!", 
       		html: 	`<p>Hey ${req.body.fname}!</p>
@@ -58,7 +58,9 @@ router.route('/adduser').post(function(req, res){
       							</p>
       							<br>
       							<p>Cheers,</p>
-      							<p>The Team at ProCleanServ<p>` // html body
+      							<p>The Team at ProCleanServ<p>
+      							<img src="http://image.flaticon.com/icons/svg/231/231920.svg" width=200px/>
+      							` // html body
       };
 
       transport.sendMail(email, function(err, status) {
