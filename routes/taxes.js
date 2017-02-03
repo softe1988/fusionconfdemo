@@ -1,18 +1,18 @@
-/*
+
 var express = require('express');
 //var app = require('../app');
 var router = express.Router();
 var nodemailer = require('nodemailer');
 var db = require('mongoose');
-var User = require('../models/user.js');
+var Tax = require('../models/taxes.js');
 //var welcomeEmail = require('../mailer/welcomeEmail');
 
-router.get('/newuser', function(req, res, next) {
+router.get('/fetchTaxes', function(req, res, next) {
   res.render('index', { title: 'Sign Up' });
 });
 
 router.post('/adduser', function(req,res){
-	var db = req.db; 
+	var db = req.db;
   var userInfo = {
     fname: req.body.fname,
     lname: req.body.lname,
@@ -20,11 +20,15 @@ router.post('/adduser', function(req,res){
     createdAt: Date.now(),
     updatedAt: Date.now()
   };
+}
+
+
+/*
 
   User.create(userInfo)
     .then(function(data) {
        return res.status(200).json({userInfo: data})
-    }) 
+    })
     .then(function(user){
       var recipient = user.req.body.email;
 
@@ -32,7 +36,7 @@ router.post('/adduser', function(req,res){
         host: '127.0.0.1',
         port: 8300
       };
-      
+
       var transport = nodemailer.createTransport(`smtps://${process.env.GMAIL_USERNAME}%40gmail.com:${process.env.GMAIL_PASSWORD}@smtp.gmail.com`);
 
       var email = {
@@ -57,10 +61,10 @@ router.post('/adduser', function(req,res){
     .catch(function(err) {
       if(err) {
         return res.status(500).json({err: `Server error creating user ${err.message}` });
-      } 
+      }
   });
 });
-
+*/
 /*
 function updateUser(req, res){
   var userInfo = {
@@ -79,9 +83,8 @@ function updateUser(req, res){
       return res.status(200).json({userInfo: data});
   });
 }
-
-module.exports.createUser = createUser;
-module.exports.updateUser = updateUser;
+*/
+module.exports.fetchTax = fetchTax;
+//module.exports.updateUser = updateUser;
 
 module.exports = router;
-*/
