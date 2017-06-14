@@ -7,10 +7,17 @@ var db = require('mongoose');
 var Tax = require('../models/taxes.js');
 //var welcomeEmail = require('../mailer/welcomeEmail');
 
-router.get('/fetchTaxes', function(req, res, next) {
-  res.render('index', { title: 'Sign Up' });
+router.get('/fetchTaxes', function(req, res) {
+  var db = req.db;
+  Tax.find({}), function(err, taxes) {
+    if(err) {
+      console.log(err.message);
+    }
+    console.log(taxes);
+    return taxes;
+  }
 });
-
+/*
 router.post('/adduser', function(req,res){
 	var db = req.db;
   var userInfo = {
@@ -22,7 +29,7 @@ router.post('/adduser', function(req,res){
   };
 }
 
-
+*/
 /*
 
   User.create(userInfo)
@@ -84,7 +91,7 @@ function updateUser(req, res){
   });
 }
 */
-module.exports.fetchTax = fetchTax;
+//module.exports.taxes = taxes;
 //module.exports.updateUser = updateUser;
 
 module.exports = router;

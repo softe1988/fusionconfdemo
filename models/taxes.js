@@ -5,7 +5,7 @@ var TaxSchema = mongoose.Schema({
   year: String,
   totalPaid: String,
   software: String,
-  date: Date
+  date: Date,
   createdAt: {type: Date, default: Date.now},
   updatedAt: {type: Date, default: Date.now}
 });
