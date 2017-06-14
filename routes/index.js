@@ -50,9 +50,9 @@ router.route('/adduser').post(function(req, res){
 		
       var email = {
           to: recipient,
-//from: 'procleanservcommunity@gmail.com',
+					from: 'procleanservcommunity@gmail.com',
 					//from: 'nappyroots2964@aol.com',
-					from: 'technicalrecruiter88@gmail.com',
+					//from: 'technicalrecruiter88@gmail.com',
           subject: "Welcome To ProCleanServ",
           text: `Hello ${req.body.fname},\n\n Welcome to the ProCleanServ Community! We are launching a digital platform that will connect cleaning professionals to clients and resources. Clients can look forward to a centralized platform that will allow them to find, schedule, and pay for cleaning services. We are looking forward to providing clients and professionals these quality services in 2018. Stay tuned for updates on our launch date and service offerings on our platform! \n Cheers, \n The Team At ProCleanServ`, 
 					/*
