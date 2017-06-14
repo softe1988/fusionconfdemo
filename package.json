@@ -12,11 +12,11 @@
     "debug": "~2.2.0",
     "dotenv": "^4.0.0",
     "ejs": "~2.5.2",
+    "emailjs": "^1.0.9",
     "express": "~4.14.0",
     "mongodb": "^2.2.10",
     "mongoose": "^4.6.5",
     "morgan": "~1.7.0",
-    "nodemailer": "^2.6.4",
     "serve-favicon": "~2.3.0"
   }
 }

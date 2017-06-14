@@ -1,8 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var nodemailer = require('nodemailer');
+var email = require('emailjs');
+var emailServer = email.server.connect({
+	user: process.env.GMAIL_USERNAME,
+	password: process.env.GMAIL_PASSWORD,
+	host: 'smtp.aol.com',
+	port: 587,
+	tls: {ciphers: 'SSLv3'}
+});
 var db = require('mongoose');
 var User = require('../models/user.js');
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -38,11 +46,11 @@ router.route('/adduser').post(function(req, res){
 					}
 			})
 			var recipient = user.email;
-			var transport = nodemailer.createTransport(`smtps://${process.env.GMAIL_USERNAME}%40gmail.com:${process.env.GMAIL_PASSWORD}@smtp.gmail.com`);
-
+		
       var email = {
           to: recipient,
-          from: 'procleanservcommunity@gmail.com',
+//from: 'procleanservcommunity@gmail.com',
+					from: 'nappyroots2964@aol.com',
           subject: "Welcome To ProCleanServ",
           text: "Hello!\n\n Welcome to ProCleanServ. Stay tuned for updates on our launch date and service offerings on our platform!", 
       		html: 	`<p>Hey ${req.body.fname}!</p>
@@ -63,14 +71,13 @@ router.route('/adduser').post(function(req, res){
       							` // html body
       };
 
-      transport.sendMail(email, function(err, status) {
-        console.log("email " +email);
+      emailServer.send(email, function(err, status) {
+        console.log(`email ${email}`);
         if(err) {
           console.log(err);
           return `Error sending email ${err.message}`;
           process.exit();
         }
-          //res.redirect("") create success page
           console.log(`Message sent ${status.response}`);
       });
     }
