@@ -2,7 +2,6 @@
 var express = require('express');
 //var app = require('../app');
 var router = express.Router();
-var nodemailer = require('nodemailer');
 var db = require('mongoose');
 var Tax = require('../models/taxes.js');
 //var welcomeEmail = require('../mailer/welcomeEmail');

@@ -4,7 +4,8 @@ var email = require('emailjs');
 var emailServer = email.server.connect({
 	user: process.env.GMAIL_USERNAME,
 	password: process.env.GMAIL_PASSWORD,
-	host: 'smtp.aol.com',
+	//host: 'smtp.aol.com',
+	host: 'smtp.gmail.com',
 	port: 587,
 	tls: {ciphers: 'SSLv3'}
 });
@@ -50,25 +51,31 @@ router.route('/adduser').post(function(req, res){
       var email = {
           to: recipient,
 //from: 'procleanservcommunity@gmail.com',
-					from: 'nappyroots2964@aol.com',
+					//from: 'nappyroots2964@aol.com',
+					from: 'technicalrecruiter88@gmail.com',
           subject: "Welcome To ProCleanServ",
-          text: "Hello!\n\n Welcome to ProCleanServ. Stay tuned for updates on our launch date and service offerings on our platform!", 
-      		html: 	`<p>Hey ${req.body.fname}!</p>
-      						 <p>Welcome to ProCleanServ. 
-	      							We are launching 
-	      							a digital platform that will connect 
-	      							cleaning professionals to clients and resources. 
-	      							Clients can look forward to a centralized platform  
-	      							that will allow them to find, schedule, 
-	      							and pay for cleaning services. 
-	      							We are looking forward to providing 
-	      							clients and professionals these quality services in 2018.
-      							</p>
-      							<br>
-      							<p>Cheers,</p>
-      							<p>The Team at ProCleanServ<p>
-      							<img src="http://image.flaticon.com/icons/svg/231/231920.svg" width=200px/>
-      							` // html body
+          text: `Hello ${req.body.fname},\n\n Welcome to the ProCleanServ Community! We are launching a digital platform that will connect cleaning professionals to clients and resources. Clients can look forward to a centralized platform that will allow them to find, schedule, and pay for cleaning services. We are looking forward to providing clients and professionals these quality services in 2018. Stay tuned for updates on our launch date and service offerings on our platform! \n Cheers, \n The Team At ProCleanServ`, 
+					/*
+					attachment: {
+						data: 	`<p>Hey ${req.body.fname}!</p>
+										<p>Welcome to ProCleanServ. 
+												We are launching 
+												a digital platform that will connect 
+												cleaning professionals to clients and resources. 
+												Clients can look forward to a centralized platform  
+												that will allow them to find, schedule, 
+												and pay for cleaning services. 
+												We are looking forward to providing 
+												clients and professionals these quality services in 2018.
+											</p>
+											<br>
+											<p>Cheers,</p>
+											<p>The Team at ProCleanServ<p>
+											<img src="http://image.flaticon.com/icons/svg/231/231920.svg" width=200px/>
+											`, // html body
+											inline: true
+					}
+					*/
       };
 
       emailServer.send(email, function(err, status) {
