@@ -18,11 +18,31 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.route('/adduser').get(function(req, res){
-	res.render('user');
-})	
+/*
+router.route('/adduser').get(function(req, res){ 
+	var db = req.db;
+	//var displayInfo = db.
 
-router.route('/adduser').post(function(req, res){
+	res.render('user');
+	//console.log(`DISPLAY ${displayInfo}`)
+})	
+*/
+router.route('/adduser').all(function(req, res, next){
+	next();
+})
+	.get(function(req, res){ 
+		var userdb = db.redux; 
+		var user = userdb.count() 
+		
+		res.render("user", {
+			displayName:{
+				fname: user.fname,
+				lname: user.lname,
+				email: user.email
+			}
+	})
+})		
+.post(function(req, res){
 	var db = req.db; 
   
   User.create({
@@ -33,49 +53,29 @@ router.route('/adduser').post(function(req, res){
     updatedAt: Date.now()
   	}, 
   	function(err, user){
-  		if(err){
+			if(err){
   			res.send("There was a problem creating a new user try again")
   		} else{
   			console.log(`creating new user ${JSON.stringify(user, null, 2)}`)
   			res.format({
   				html: function(){
-  					res.location("/adduser");
-  					res.redirect("/adduser")
-  				},
-  				json: function(){
-  					res.json(user);
+						res.render("user", {
+							displayName:{
+								fname: user.fname,
+								lname: user.lname,
+								email: user.email
+							}  
+						})
 					}
 			})
 			var recipient = user.email;
 		
       var email = {
           to: recipient,
-					from: 'procleanservcommunity@gmail.com',
-					//from: 'nappyroots2964@aol.com',
-					//from: 'technicalrecruiter88@gmail.com',
-          subject: "Welcome To ProCleanServ",
-          text: `Hello ${req.body.fname},\n\n Welcome to the ProCleanServ Community! We are launching a digital platform that will connect cleaning professionals to clients and resources. Clients can look forward to a centralized platform that will allow them to find, schedule, and pay for cleaning services. We are looking forward to providing clients and professionals these quality services in 2018. Stay tuned for updates on our launch date and service offerings on our platform! \n\n Cheers, \n The Team At ProCleanServ`, 
-					/*
-					attachment: {
-						data: 	`<p>Hey ${req.body.fname}!</p>
-										<p>Welcome to ProCleanServ. 
-												We are launching 
-												a digital platform that will connect 
-												cleaning professionals to clients and resources. 
-												Clients can look forward to a centralized platform  
-												that will allow them to find, schedule, 
-												and pay for cleaning services. 
-												We are looking forward to providing 
-												clients and professionals these quality services in 2018.
-											</p>
-											<br>
-											<p>Cheers,</p>
-											<p>The Team at ProCleanServ<p>
-											<img src="http://image.flaticon.com/icons/svg/231/231920.svg" width=200px/>
-											`, // html body
-											inline: true
-					}
-					*/
+					from: 'technicalrecruiter88@gmail.com',
+          subject: "Welcome To Fusion Conf",
+          text: `Hello ${req.body.fname},\n\n Welcome to the Fusion Conf Community! We are looking forward to providing clients and professionals these quality conferences in 2018. Stay tuned for updates on our launch date and service offerings on our platform! \n\n Cheers, \n The Team At FusionConf`, 
+					
       };
 
       emailServer.send(email, function(err, status) {
@@ -86,8 +86,8 @@ router.route('/adduser').post(function(req, res){
           process.exit();
         }
           console.log(`Message sent ${status.response}`);
-      });
-    }
+			});
+		}
 	})
 })
 
