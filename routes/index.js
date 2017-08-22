@@ -29,6 +29,54 @@ router.route('/users').get(function (req, res){
 	})
 });
 
+router.route('/users/edit/:id').post(function (req, res){ 
+	var id = req.params.id;
+
+	User.findById(id, function(err, usr){
+		if(!usr) {
+			console.log(`Error: ${err}`);
+		} else 
+		{
+		
+			usr.fname = req.body.fname;
+			usr.lname = req.body.lname;
+			usr.email = req.body.email;
+
+
+			usr.save()
+			.then(user => {
+				res.render('users', {users: usr});
+			})
+			.catch(err => {
+				return res.status(400).send("unable to update user");
+			})
+		}
+	});
+});
+
+router.route('/users/edit/:id').get(function (req, res){ 
+	var id = req.params.id;
+
+	User.findById(id, function(err, usr){
+		if(!usr) {
+			console.log(`Error: ${err}`);
+		}
+		res.render('editUser', {users: usr})
+		
+		usr.fname = req.body.fname;
+		usr.lname = req.body.lname;
+		usr.email = req.body.email;
+
+		/*
+		usr.save().then(data => {
+			res.redirect('users');
+		})
+		.catch(err => {
+			res.status(400).send("unable to update user");
+		})
+		*/
+	})
+});
 
 router.route('/adduser').all(function(req, res, next){
 	next();

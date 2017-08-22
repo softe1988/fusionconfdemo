@@ -60,6 +60,8 @@
                     <tr>
                       <td><%= users[i].fname %> <%= users[i].lname %></td>
                       <td><%= users[i].createdAt.toDateString() %></td>
+                      <td><a href="/users/edit/<%=users[i]._id %>" class="btn btn-primary">Edit</a></td>
+                      <td><a href="" class="btn btn-danger">Delete</a></td>
                     </tr>
                     <% } %>
                 </tbody>
