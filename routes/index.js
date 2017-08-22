@@ -18,21 +18,22 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-/*
-router.route('/adduser').get(function(req, res){ 
-	var db = req.db;
-	//var displayInfo = db.
+router.route('/users').get(function (req, res){ 
+		
+	User.find({}).exec(function(err, usr){
+		if(err) {
+			console.log(`Error: ${err}`);
+		}
+			console.log(`USERS ${usr}`)
+			res.render('users', {users: usr});
+	})
+});
 
-	res.render('user');
-	//console.log(`DISPLAY ${displayInfo}`)
-})	
-*/
+
 router.route('/adduser').all(function(req, res, next){
 	next();
 })
 	.get(function(req, res){ 
-		var userdb = db.redux; 
-		var user = userdb.count() 
 		
 		res.render("user", {
 			displayName:{

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8" />
+    <title>ProCleanServ</title>
+    <meta name="author" content="ukieweb" />
+    <meta name="keywords" content="cleaning, cleaner, cleaning service, house cleaner cleaning supplies" />
+    <meta name="description" content="Washer - Page Template" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <!-- Font Awesome -->
+    <link type="text/css" media="all" href="/fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- Libs CSS -->
+    <link type="text/css" media="all" href="/boostrap-files/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Template CSS -->
+    <link type="text/css" media="all" href="/css/style.css" rel="stylesheet" />
+    <!-- Responsive CSS -->
+    <link type="text/css" media="all" href="/css/respons.css" rel="stylesheet" />
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="144x144" href="/img/favicons/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="/img/favicons/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/img/favicons/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon" href="/img/favicons/apple-touch-icon.png" />
+    <link rel="shortcut icon" href="/img/favicons/favicon.png" />
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Exo+2:400,100,100italic,200,200italic,300,300italic,400italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+
+    <!-- Load page -->
+    <div class="animationload">
+        <div class="loader"></div>
+    </div>
+    <!-- End load page -->
+
+
+    <!-- Content Wrapper -->
+    <div id="wrapper">
+
+        <!-- Washer -->
+        <div class="place_for_washer">
+            <div class="washer"></div>
+            <div class="clothing"></div>
+            <div class="shadow"></div>
+        </div>
+        <!-- End Washer -->
+
+        <h2 class="title">Here's a list of members!</h2>
+            <div class="container">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <td><b>User Names</b></td>
+                        <td colspan="2"><b>Created</b></td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <% for(var i=0; i < users.length; i++) { %>
+                    <tr>
+                      <td><%= users[i].fname %> <%= users[i].lname %></td>
+                      <td><%= users[i].createdAt.toDateString() %></td>
+                    </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- end Content Wrapper -->
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+
+            <!-- footer socials -->
+            <div class="row">
+
+                <div class="footer_socials col-sm-12 text-center">
+
+                    <div class="contact_icons">
+                        <ul class="contact_socials clearfix">
+                            <!-- social icons -->
+                            <li><a class="ukie_social" href="https://www.facebook.com/Procleanserv-1883661231913517/"><i class="fa fa-facebook"></i></a></li>
+                            <li><a class="ukie_social" href="https://twitter.com/ProCleanServ4U"><i class="fa fa-twitter"></i></a></li>
+                            
+                        </ul>
+                    </div>
+
+                    <div class="copyright">&copy; ProCleanServ 2017 All Rights Reserved</div>
+
+                </div>
+
+            </div>
+            <!-- end footer socials -->
+
+        </div>
+        <!-- end container -->
+    </footer>
+    <!-- end footer -->
+
+
+    <!-- Scripts -->
+    <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
+    <script src="/boostrap-files/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/js/modernizr.custom.js" type="text/javascript"></script>
+    <script src="/js/jquery.nicescroll.min.js" type="text/javascript"></script>
+    <script src="/js/jquery.lwtCountdown-1.0.js" type="text/javascript"></script>
+    <script src="/js/scripts.js" type="text/javascript"></script>
+    <!--
+    <script src="../../server/routes/users.js" type="text/javascript" charset="UTF-8" async></script>
+    -->
+  </body>
+</html>
