@@ -59,6 +59,23 @@ router.route('/users/edit/:id').post(function (req, res){
 	});
 });
 
+router.route('/users/delete/:id').get(function (req, res){ 
+	var id = req.params.id;
+
+	User.findByIdAndRemove({_id: id}, function(err, usr){
+		if(err) {
+			console.log(`Error: ${err}`);
+		} 
+		User.find({}).exec(function(err, usr){
+			if(err) {
+				console.log(`Error: ${err}`);
+			}
+				console.log(`USERS ${usr}`)
+				res.render('users', {users: usr});
+		})	
+	});			
+});
+
 router.route('/users/edit/:id').get(function (req, res){ 
 	var id = req.params.id;
 
