@@ -1,20 +1,33 @@
 
 var express = require('express');
-//var app = require('../app');
 var router = express.Router();
-var db = require('mongoose');
-var Tax = require('../models/taxes.js');
-//var welcomeEmail = require('../mailer/welcomeEmail');
+var request = require("request");
+var Promise = require('bluebird');
 
-router.get('/fetchTaxes', function(req, res) {
-  var db = req.db;
-  Tax.find({}), function(err, taxes) {
-    if(err) {
-      console.log(err.message);
-    }
-    console.log(taxes);
-    return taxes;
-  }
+router.get('/', function(req, res, next) {
+  res.render('got', { title: 'Express' });
+});
+
+router.route('/got').get(function(req, res) {
+  var options = { 
+    method: 'GET',
+    url:'https://www.anapioficeandfire.com/api/characters/'
+  };
+
+  request(options, function(err, response, body){
+    if(!err && response.statusCode === 200 ) {
+    console.log(err)
+    } 
+  })
+  return new Promise (function(resolve, reject){
+    request(options, function(err, data){        
+      if(err){
+        reject(err);
+      } else {
+        resolve(data.body);
+      }              
+    });
+  });   
 });
 /*
 router.post('/adduser', function(req,res){

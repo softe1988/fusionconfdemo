@@ -60,8 +60,7 @@
                     <tr>
                       <td><%= users[i].fname %> <%= users[i].lname %></td>
                       <td><%= users[i].createdAt.toDateString() %></td>
-                      <td><a href="/got?<%=users[i].fname %> <%=users[i].lname %>"  class="btn btn-primary">Get Details</a></td>
-                      <td><a href="/users/edit/<%=users[i]._id %>" class="btn btn-warning">Edit</a></td>
+                      <td><a href="/users/edit/<%=users[i]._id %>" class="btn btn-primary">Edit</a></td>
                       <td><a href="/users/delete/<%=users[i]._id %>"  class="btn btn-danger">Delete</a></td>
                     </tr>
                     <% } %>

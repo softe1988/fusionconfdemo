@@ -6,9 +6,10 @@ var logger 			    = require('morgan');
 var cookieParser 	  = require('cookie-parser');
 var bodyParser 		  = require('body-parser');
 
-var index         = require('./routes/index');
-var taxes         = require('./routes/taxes');
-//var createUsers = users.createUsers;
+var index           = require('./routes/index');
+var got             = require('./routes/got');
+//var got             = require('./routes/gotChars');
+
 
 var app = express();
 
@@ -30,7 +31,8 @@ app.use(function(req, res, next){
 })
 */
 app.use('/', index);
-app.use('/fetchTaxes', taxes);
+app.use('/got', got);
+//app.use('/got', gotChars);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
