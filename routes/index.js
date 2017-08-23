@@ -43,11 +43,16 @@ router.route('/users/edit/:id').post(function (req, res){
 			usr.email = req.body.email;
 
 
-			usr.save()
-			.then(user => {
-				res.render('users', {users: usr});
+			usr.save().then(user => {
+				User.find({}).exec(function(err, usr){
+					if(err) {
+						console.log(`Error: ${err}`);
+					}
+						console.log(`USERS ${usr}`)
+						res.render('users', {users: usr});
+				})	
 			})
-			.catch(err => {
+				.catch(err => {
 				return res.status(400).send("unable to update user");
 			})
 		}
