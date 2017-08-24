@@ -1,34 +1,65 @@
 
-var express = require('express');
-var router = express.Router();
-var request = require("request");
-var Promise = require('bluebird');
+let express = require('express')
+    router  = express.Router()
+    request = require("request")
+    Promise = require('bluebird')
+    User    = require('../models/user.js');
 
 router.get('/', function(req, res, next) {
   res.render('got', { title: 'Express' });
 });
 
-router.route('/got').get(function(req, res) {
-  var options = { 
+router.route('/got/api/:id').get(function(req, res) {
+  //console.log(`PARAMS ${req.params.id}`)
+  let id = req.params.id;
+/*
+  let options = { 
     method: 'GET',
-    url:'https://www.anapioficeandfire.com/api/characters/'
+    url:'https://www.anapioficeandfire.com/api/characters?name=<%=user.fname %> <%=user.lname %>'
   };
+*/
+  User.findById(id, function(err, usr){
+		if(!usr) {
+			console.log(`Error: ${err}`);
+		} else 
+		{
+      
+      console.log(`The User ${usr.fname}`)
+      /*  
+			usr.fname = req.body.fname;
+			usr.lname = req.body.lname;
+			usr.email = req.body.email;
+      */
 
-  request(options, function(err, response, body){
-    if(!err && response.statusCode === 200 ) {
-    console.log(err)
-    } 
-  })
-  return new Promise (function(resolve, reject){
-    request(options, function(err, data){        
-      if(err){
-        reject(err);
-      } else {
-        resolve(data.body);
-      }              
-    });
-  });   
+      let options = { 
+        method: 'GET',
+        url:'https://www.anapioficeandfire.com/api/characters?name=<%=user.fname %> <%=user.lname %>'
+      };
+
+			usr.then(user => {
+        request(options, user, function(err, response, body){
+          if(!err && response.statusCode === 200 ) {
+          console.log(err)
+          } 
+        })
+        return new Promise (function(resolve, reject){
+          request(options, function(err, data){        
+            if(err){
+              reject(err);
+            } else {
+              resolve(data.body);
+              res.render('got')
+            }              
+          });
+        }); 
+			})
+				.catch(err => {
+				return res.status(400).send("unable to update user");
+			})
+		}
+	});
 });
+
 /*
 router.post('/adduser', function(req,res){
 	var db = req.db;

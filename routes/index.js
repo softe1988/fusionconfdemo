@@ -1,17 +1,17 @@
-var express = require('express');
-var router = express.Router();
-var email = require('emailjs');
-var emailServer = email.server.connect({
-	user: process.env.GMAIL_USERNAME,
-	password: process.env.GMAIL_PASSWORD,
-	//host: 'smtp.aol.com',
-	host: 'smtp.gmail.com',
-	port: 587,
-	tls: {ciphers: 'SSLv3'}
-});
-var db = require('mongoose');
-var User = require('../models/user.js');
-
+let express = require('express')
+	router = express.Router()
+ 	email = require('emailjs')
+	emailServer = email.server.connect({
+		user: process.env.GMAIL_USERNAME,
+		password: process.env.GMAIL_PASSWORD,
+		host: 'smtp.gmail.com',
+		port: 587,
+		tls: {ciphers: 'SSLv3'}
+	})
+	db = require('mongoose')
+	User = require('../models/user.js')
+	request = require("request")
+	Promise = require('bluebird');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -161,5 +161,69 @@ router.route('/adduser').all(function(req, res, next){
 		}
 	})
 })
+
+router.route('/got/api/:id').get(function(req, res) {
+	console.log(`PARAMS ${req.params.id}`)
+	let id = req.params.id;
+  
+	/*
+	let character = User.findById(id, function(err, usr){
+		if(!usr) {
+			console.log(`Error: ${err}`);
+		} 
+		
+		console.log(`The User ${usr.fname}`)
+		return usr;
+	});
+	*/
+	let query = User.findById(id, function(err, usr){
+		if(!usr) {
+			console.log(`Error: ${err}`);
+		} 
+		
+		console.log(`The User ${usr.fname}`)
+		return usr;
+			/* 
+			 usr.fname = req.body.fname;
+			  usr.lname = req.body.lname;
+			  usr.email = req.body.email;
+		*/
+	});
+
+
+  
+	query.exec().then(user => {
+		let options = { 
+			method: 'GET',
+			url:`https://www.anapioficeandfire.com/api/characters?name=${user.fname} ${user.lname}`
+		};
+		
+		request(options, function(err, response, body){
+			console.log(`BODY ${body}`)
+			console.log(`BODY ${options.url}`)
+			
+			if(!err && response.statusCode === 200 ) {
+			console.log(err)
+			} 
+			
+				return new Promise (function(resolve, reject){
+					request(options, function(err, data){     
+						console.log(`data ${data.body}`)  
+						if(err){
+							reject(err);
+						} else {
+							console.log(`HERE ${data}`)
+							resolve(data.body);
+							res.render('got', {info: data})
+						}              
+					});
+				}); 
+			})	
+		})
+		.catch(err => {
+			return res.status(400).send("unable to update user");
+		})
+	});
+//});
 
 module.exports = router;
