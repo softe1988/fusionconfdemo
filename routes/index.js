@@ -216,7 +216,7 @@ router.route('/got/api/:id').get(function(req, res) {
 					} else {
 						var info = JSON.parse(data.body)
 
-						console.log(`HERE ${info[0].url}`)
+						console.log(`HERE ${info[0]}`)
 						resolve(info.body);
 						res.render('got', {info: info})
 						//res.json(data.body)
