@@ -175,6 +175,17 @@ router.route('/got/api/:id').get(function(req, res) {
 		console.log(`The User ${usr.fname}`)
 		return usr;
 	});
+	
+	let query = User.findById(id, function(err, usr){
+		if(!usr) {
+			console.log(`Error: ${err}`);
+		} 
+		
+		console.log(`The User ${usr.fname}`)
+		return usr;
+		
+	});
+
 	*/
 	let query = User.findById(id, function(err, usr){
 		if(!usr) {
@@ -183,15 +194,9 @@ router.route('/got/api/:id').get(function(req, res) {
 		
 		console.log(`The User ${usr.fname}`)
 		return usr;
-			/* 
-			 usr.fname = req.body.fname;
-			  usr.lname = req.body.lname;
-			  usr.email = req.body.email;
-		*/
+		
 	});
 
-
-  
 	query.exec().then(user => {
 		let options = { 
 			method: 'GET',
@@ -199,31 +204,32 @@ router.route('/got/api/:id').get(function(req, res) {
 		};
 		
 		request(options, function(err, response, body){
-			console.log(`BODY ${body}`)
-			console.log(`BODY ${options.url}`)
-			
 			if(!err && response.statusCode === 200 ) {
-			console.log(err)
+				console.log(err)
 			} 
 			
-				return new Promise (function(resolve, reject){
-					request(options, function(err, data){     
-						console.log(`data ${data.body}`)  
-						if(err){
-							reject(err);
-						} else {
-							console.log(`HERE ${data}`)
-							resolve(data.body);
-							res.render('got', {info: data})
-						}              
-					});
-				}); 
-			})	
-		})
-		.catch(err => {
-			return res.status(400).send("unable to update user");
-		})
-	});
-//});
+			return new Promise (function(resolve, reject){
+				request(options, function(err, data){     
+					console.log(`data ${data}`)  
+					if(err){
+						reject(err);
+					} else {
+						var info = JSON.parse(data.body)
+
+						console.log(`HERE ${info[0].url}`)
+						resolve(info.body);
+						res.render('got', {info: info})
+						//res.json(data.body)
+					}              
+				});
+			}); 
+		
+		})	
+	})
+	.catch(err => {
+		return res.status(400).send("unable to update user");
+	})
+	
+});
 
 module.exports = router;
