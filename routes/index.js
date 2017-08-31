@@ -27,13 +27,12 @@ router.get('/', function (req, res){
 });
 
 router.post('/users/edit/:id', function (req, res){ 
-	var id = req.params.id;
+	let id = req.params.id;
 
 	User.findById(id, function(err, usr){
 		if(!usr) {
 			console.log(`Error: ${err}`);
-		} else 
-		{
+		} 
 			usr.fname = req.body.fname;
 			usr.lname = req.body.lname;
 			usr.email = req.body.email;
@@ -47,10 +46,9 @@ router.post('/users/edit/:id', function (req, res){
 						res.render('users', {users: usr});
 				})	
 			})
-				.catch(err => {
-				return res.status(400).send("unable to update user");
-			})
-		}
+			.catch(err => {
+			return res.status(400).send("unable to update user");
+		})
 	});
 });
 
@@ -65,14 +63,14 @@ router.get('/users/delete/:id', function (req, res){
 			if(err) {
 				console.log(`Error: ${err}`);
 			}
-				console.log(`USERS ${usr}`)
-				res.render('users', {users: usr});
+			console.log(`USERS ${usr}`)
+			res.render('users', {users: usr});
 		})	
 	});			
 });
 
 router.get('/users/edit/:id', function (req, res){ 
-	var id = req.params.id;
+	let id = req.params.id;
 
 	User.findById(id, function(err, usr){
 		if(!usr) {
@@ -94,8 +92,6 @@ router.route('/adduser').all(function(req, res, next){
 	res.render("index");
 })		
 .post(function(req, res){
-	var db = req.db; 
-  
   	User.create(
 	{
     	fname: req.body.fname,
@@ -165,7 +161,6 @@ router.get('/got/api/:id', function(req, res) {
 			if(!err && response.statusCode === 200 ) {
 				console.log(err)
 			} 
-			
 			return new Promise (function(resolve, reject){
 				request(options, function(err, data){     
 					console.log(`data ${data}`)  
