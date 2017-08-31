@@ -54,7 +54,7 @@ router.post('/users/edit/:id', function (req, res){
 	});
 });
 
-router.route('/users/delete/:id').get(function (req, res){ 
+router.get('/users/delete/:id', function (req, res){ 
 	var id = req.params.id;
 
 	User.findByIdAndRemove({_id: id}, function(err, usr){
@@ -71,7 +71,7 @@ router.route('/users/delete/:id').get(function (req, res){
 	});			
 });
 
-router.route('/users/edit/:id').get(function (req, res){ 
+router.get('/users/edit/:id', function (req, res){ 
 	var id = req.params.id;
 
 	User.findById(id, function(err, usr){
@@ -91,58 +91,57 @@ router.route('/adduser').all(function(req, res, next){
 	next();
 })
 .get(function(req, res){ 
-	res.render("index")
+	res.render("index");
 })		
 .post(function(req, res){
 	var db = req.db; 
   
-  User.create({
-    fname: req.body.fname,
-    lname: req.body.lname,
-    email: req.body.email,
-    createdAt: Date.now(),
-    updatedAt: Date.now()
+  	User.create(
+	{
+    	fname: req.body.fname,
+    	lname: req.body.lname,
+    	email: req.body.email,
+    	createdAt: Date.now(),
+    	updatedAt: Date.now()
   	}, 
   	function(err, user){
-			if(err){
+		if(err){
   			res.send("There was a problem creating a new user try again")
-  		} else{
-  			console.log(`creating new user ${JSON.stringify(user, null, 2)}`)
-  			res.format({
-  				html: function(){
-					res.render("user", {
-						displayName:{
-							fname: user.fname,
-							lname: user.lname,
-							email: user.email
-						}  
-					})
-				}
-			})
-			var recipient = user.email;
+  		}	
+		console.log(`creating new user ${JSON.stringify(user, null, 2)}`)
+		res.format({
+			html: function(){
+				res.render("user", {
+					displayName:{
+						fname: user.fname,
+						lname: user.lname,
+						email: user.email
+					}  
+				})
+			}
+		})
 		
-      var email = {
-          to: recipient,
-		  from: 'technicalrecruiter88@gmail.com',
-          subject: "Welcome To Fusion Conf",
-          text: `Hello ${req.body.fname},\n\n Welcome to the Fusion Conf Community! We are looking forward to providing quality conferences in 2018 and beyond. Stay tuned for updates on our conference dates and service offerings on our platform! \n\n Cheers, \n The Fusion Conf Team`, 
+		var recipient = user.email;
+    	var email = {
+        	to: recipient,
+		 	from: 'technicalrecruiter88@gmail.com',
+          	subject: "New User Created on GoT Character Search",
+          	text: `Hello ${req.body.fname},\n\n Thanks for contributing to GoT Character Search! We hope the new Character you created is spelled correctly, or you will have to bend the knee to the King of the North and Mother of Dragons. \n\n Cheers, \n The GoT Character Search Team`, 
 					
-      };
+      	};
 
-      emailServer.send(email, function(err, status) {
-        console.log(`email ${email}`);
-        if(err) {
-          console.log(err);
-          return `Error sending email ${err.message}`;
-          process.exit();
-        }
-          console.log(`Message sent ${status.response}`);
-			});
-		}
+      	emailServer.send(email, function(err, status) {
+        	console.log(`email ${email}`);
+        	if(err) {
+          		console.log(err);
+          		return `Error sending email ${err.message}`;
+        	}
+			console.log(`Message sent ${status.response}`);
+		});
 	})
 })
 
-router.route('/got/api/:id').get(function(req, res) {
+router.get('/got/api/:id', function(req, res) {
 	console.log(`PARAMS ${req.params.id}`)
 	let id = req.params.id;
   
