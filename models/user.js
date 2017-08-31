@@ -1,7 +1,6 @@
-'use strict';
-var mongoose = require('mongoose');
+let mongoose = require('mongoose');
 
-var UserSchema = mongoose.Schema({
+let UserSchema = mongoose.Schema({
   fname: String,
   lname: String,
   email: String,

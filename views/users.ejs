@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Fusion Conf</title>
+    <title>GoT Character Search</title>
     <meta name="author" content="ukieweb" />
     <meta name="keywords" content="cleaning, cleaner, cleaning service, house cleaner cleaning supplies" />
     <meta name="description" content="Washer - Page Template" />
@@ -27,31 +27,27 @@
 
 </head>
 <body>
-
     <!-- Load page -->
     <div class="animationload">
         <div class="loader"></div>
     </div>
     <!-- End load page -->
 
-
     <!-- Content Wrapper -->
     <div id="wrapper">
-
         <!-- Washer -->
         <div class="place_for_washer">
             <div class="washer"></div>
             <div class="clothing"></div>
             <div class="shadow"></div>
         </div>
-        <!-- End Washer -->
-
-        <h2 class="title">Here's a list of members!</h2>
-            <div class="container">
+    
+        <div class="container">
+            <h2 class="title">Here's A List Of Available Characters!</h2>
                 <table class="table table-striped">
                   <thead>
                     <tr>
-                        <td><b>User Names</b></td>
+                        <td><b>Character Names</b></td>
                         <td colspan="2"><b>Created</b></td>
                     </tr>
                   </thead>
@@ -67,6 +63,16 @@
                     <% } %>
                 </tbody>
             </table>
+            <br/>
+            <br/>
+            <div class="row">
+                <div class="col-xs-5 col-md-5 col-lg-5"></div>
+                <div class="col-xs-5 col-md-5 col-lg-5"></div>
+                <div class="col-xs-1 col-md-1 col-lg-1">
+                    <a href="/adduser" class="btn btn-success">Create New Character</a>
+                </div>
+                <div class="col-xs-1 col-md-1 col-lg-1"></div>
+            </div>
         </div>
     </div>
     <!-- end Content Wrapper -->
@@ -100,7 +106,6 @@
         <!-- end container -->
     </footer>
     <!-- end footer -->
-
 
     <!-- Scripts -->
     <script src="/js/jquery-1.11.2.min.js" type="text/javascript"></script>
